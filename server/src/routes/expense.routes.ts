@@ -2,10 +2,11 @@ import { Router } from "express";
 import { createExpense, getExpenses, getExpenseById, updateExpense, deleteExpense } from "../controllers/expense.controller.js";
 import { validateSchema } from "../middleware/validateSchema.js";
 import { createExpenseSchema, updateExpenseSchema } from "../schemas/expense.schema.js";
-
+import { authenticateToken } from "../middleware/auth.middleware.js";
 
 const router = Router();
 
+router.use(authenticateToken);
 router.post('/', validateSchema(createExpenseSchema), createExpense);
 router.get('/', getExpenses);
 router.get('/:id', getExpenseById);
