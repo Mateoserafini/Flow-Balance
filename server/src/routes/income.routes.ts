@@ -1,6 +1,5 @@
 import { Router } from "express";
-import { createIncome, getIncomes, getIncomeById, updateIncome, deleteIncome } from "../controllers/incomeController.js";
-
+import { createIncome, getIncomes, getIncomeById, updateIncome, deleteIncome } from "../controllers/income.controller.js";
 
 const router = Router();
 

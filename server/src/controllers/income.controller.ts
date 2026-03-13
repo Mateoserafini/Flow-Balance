@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import type { Income } from "../models/income.js";
+import type { Income } from "../models/income.model.js";
 
 export const getIncomes = async (req: Request, res: Response) => {
 

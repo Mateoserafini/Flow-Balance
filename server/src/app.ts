@@ -1,11 +1,11 @@
 import  Express  from "express";
 import  morgan  from "morgan";
 import  cors  from "cors";
-import authRouter from "./routes/auth.js";
-import userRouter from "./routes/user.js";
-import expeseRouter from "./routes/expense.js";
-import categoryRouter from "./routes/category.js";
-import incomeRouter from "./routes/income.js";
+import authRouter from "./routes/auth.routes.js";
+import userRouter from "./routes/user.routes.js";
+import expeseRouter from "./routes/expense.routes.js";
+import categoryRouter from "./routes/category.routes.js";
+import incomeRouter from "./routes/income.routes.js";
 
 const app = Express();
 

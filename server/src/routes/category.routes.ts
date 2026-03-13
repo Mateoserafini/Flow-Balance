@@ -1,5 +1,5 @@
 import Router from "express";
-import { createCategory, getCategories, deleteCategory} from "../controllers/categoryController.js";  
+import { createCategory, getCategories, deleteCategory} from "../controllers/category.controller.js";
 
 const defaultCategoriesExpenses = [
     "Alquiler",

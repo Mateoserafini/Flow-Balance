@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { Expense } from "../models/expense.js";
+import { Expense } from "../models/expense.model.js";
 
 export const createExpense = async (req: Request, res: Response) => {
 };
