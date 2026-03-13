@@ -1,12 +1,14 @@
 import { Router } from "express";
 import { createIncome, getIncomes, getIncomeById, updateIncome, deleteIncome } from "../controllers/income.controller.js";
+import { validateSchema } from "../middleware/validateSchema.js";
+import { createIncomeSchema, updateIncomeSchema } from "../schemas/income.schema.js";
 
 const router = Router();
 
 router.get('/', getIncomes);
-router.post('/', createIncome);
+router.post('/', validateSchema(createIncomeSchema), createIncome);
 router.get('/:id', getIncomeById);
-router.put('/:id', updateIncome);
+router.put('/:id', validateSchema(updateIncomeSchema), updateIncome);
 router.delete('/:id', deleteIncome);
 
 export default router;
