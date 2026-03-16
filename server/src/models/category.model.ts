@@ -3,6 +3,7 @@ import mongoose, { Document } from "mongoose";
 export interface ICategory extends Document {
     userId: mongoose.Types.ObjectId;
     name: string;
+    type: 'income' | 'expense';
     createdAt?: Date;
     updatedAt?: Date;
 }       
@@ -17,6 +18,11 @@ const categorySchema = new mongoose.Schema<ICategory>({
         type: String,
         required: true,
         trim: true,
+    },
+    type: {
+        type: String,
+        enum: ['income', 'expense'],
+        required: true,
     }
 },
     {

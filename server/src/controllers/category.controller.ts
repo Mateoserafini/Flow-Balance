@@ -39,7 +39,7 @@ const defaultCategoriesIncomes = [
 export const createCategory = async (req: Request, res: Response) => {
     try {
         const userId = req.user?.id;
-        const { name } = req.body;
+        const { name, type } = req.body;
 
         if (!userId) {
             return res.status(401).json({ message: "No autorizado" });
@@ -47,7 +47,8 @@ export const createCategory = async (req: Request, res: Response) => {
 
         const newCategory = new Category({
             userId,
-            name
+            name,
+            type
         });
 
         await newCategory.save();
@@ -68,8 +69,13 @@ export const getCategories = async (req: Request, res: Response) => {
         }
 
         const categories = await Category.find({ userId }).sort({ name: 1 });
+        
+        const userExpenses = categories.filter(c => c.type === 'expense');
+        const userIncomes = categories.filter(c => c.type === 'income');
+
         res.status(200).json({ 
-            userCategories: categories,
+            userExpenses,
+            userIncomes,
             defaultExpenses: defaultCategoriesExpenses,
             defaultIncomes: defaultCategoriesIncomes
         });
