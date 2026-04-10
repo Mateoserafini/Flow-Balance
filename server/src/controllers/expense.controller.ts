@@ -34,7 +34,7 @@ export const getExpenses = async (req: Request, res: Response) => {
             return res.status(401).json({ message: "No autorizado" });
         }
 
-        const expenses = await Expense.find({ userId }).sort({ date: -1 });
+        const expenses = await Expense.find({ userId }).populate('category').sort({ date: -1 });
         res.status(200).json(expenses);
     } catch (error) {
         console.error("Error al obtener gastos:", error);
@@ -51,7 +51,7 @@ export const getExpenseById = async (req: Request, res: Response) => {
             return res.status(401).json({ message: "No autorizado" });
         }
 
-        const expense = await Expense.findOne({ _id: id, userId });
+        const expense = await Expense.findOne({ _id: id, userId }).populate('category');
         
         if (!expense) {
             return res.status(404).json({ message: "Gasto no encontrado" });

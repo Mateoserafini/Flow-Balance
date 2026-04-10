@@ -9,7 +9,7 @@ export const getIncomes = async (req: Request, res: Response) => {
             return res.status(401).json({ message: "No autorizado" });
         }
 
-        const incomes = await Income.find({ userId }).sort({ date: -1 });
+        const incomes = await Income.find({ userId }).populate('category').sort({ date: -1 });
         res.status(200).json(incomes);
     } catch (error) {
         console.error("Error al obtener ingresos:", error);
@@ -51,7 +51,7 @@ export const getIncomeById = async (req: Request, res: Response) => {
             return res.status(401).json({ message: "No autorizado" });
         }
 
-        const income = await Income.findOne({ _id: id, userId });
+        const income = await Income.findOne({ _id: id, userId }).populate('category');
         
         if (!income) {
             return res.status(404).json({ message: "Ingreso no encontrado" });

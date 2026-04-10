@@ -39,7 +39,7 @@ const defaultCategoriesIncomes = [
 export const createCategory = async (req: Request, res: Response) => {
     try {
         const userId = req.user?.id;
-        const { name, type } = req.body;
+        const { name, type, icon, color } = req.body;
 
         if (!userId) {
             return res.status(401).json({ message: "No autorizado" });
@@ -48,14 +48,42 @@ export const createCategory = async (req: Request, res: Response) => {
         const newCategory = new Category({
             userId,
             name,
-            type
+            type,
+            icon,
+            color
         });
 
         await newCategory.save();
-
         res.status(201).json(newCategory);
     } catch (error) {
         console.error("Error al crear categoría:", error);
+        res.status(500).json({ message: "Error interno del servidor" });
+    }
+};
+
+export const updateCategory = async (req: Request, res: Response) => {
+    try {
+        const userId = req.user?.id;
+        const id = req.params.id as string;
+        const { name, type, icon, color } = req.body;
+
+        if (!userId) {
+            return res.status(401).json({ message: "No autorizado" });
+        }
+
+        const updatedCategory = await Category.findOneAndUpdate(
+            { _id: id, userId },
+            { name, type, icon, color },
+            { new: true }
+        );
+
+        if (!updatedCategory) {
+            return res.status(404).json({ message: "Categoría no encontrada o no autorizada" });
+        }
+
+        res.status(200).json(updatedCategory);
+    } catch (error) {
+        console.error("Error al actualizar categoría:", error);
         res.status(500).json({ message: "Error interno del servidor" });
     }
 };

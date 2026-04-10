@@ -3,8 +3,11 @@ import { AuthProvider } from './context/AuthContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
+import Transactions from './pages/Transactions';
+import Categories from './pages/Categories';
 import ProtectedRoute from './components/ProtectedRoute';
 import PublicRoute from './components/PublicRoute';
+import Layout from './components/Layout';
 
 function App() {
   return (
@@ -17,9 +20,13 @@ function App() {
             <Route path="/register" element={<Register />} />
           </Route>
           
-          {/* Rutas Privadas / Protegidas */}
+          {/* Rutas Privadas / Protegidas con el Layout de Sidebar persisitente */}
           <Route element={<ProtectedRoute />}>
-            <Route path="/dashboard" element={<Dashboard />} />
+             <Route element={<Layout />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/transactions" element={<Transactions />} />
+              <Route path="/categories" element={<Categories />} />
+            </Route>
           </Route>
           
           {/* Redirección por defecto */}
