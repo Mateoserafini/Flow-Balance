@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+@theme {
+
+  --color-brand-primary: #1E3A8A;
+  --color-brand-secondary: #4F46E5;
+
+
+  --color-semantic-income: #10B981;
+  --color-semantic-expense: #EF4444;
+  --color-semantic-savings: #F59E0B;
+
+
+  --color-ui-bg: #F8FAFC;
+  --color-ui-text-main: #1E293B;
+  --color-ui-text-sub: #64748B;
+}
